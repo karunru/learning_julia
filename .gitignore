@@ -9,6 +9,8 @@
 /julia-*
 /source-dist.tmp
 /source-dist.tmp1
+.ipynb_checkpoints/
+
 
 *.exe
 *.dll
