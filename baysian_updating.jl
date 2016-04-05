@@ -1,5 +1,4 @@
 using Gadfly
-# using PyPlot
 using StatsBase
 
 srand(1)
@@ -13,7 +12,7 @@ plot_data = 含有率
 items = ["H","T"]
 weights = [含有率[i],1-含有率[i]]
 
-X = [sample(items,WeightVec(weights)) for i=1:n]
+X = [sample(items,WeightVec(weights)) for i=1:n] # http://statsbasejl.readthedocs.org/en/latest/sampling.html
 println("X=",X)
 
 function bayes_post(pri_prob,x)
@@ -35,4 +34,19 @@ end
 println("事前確率=",事前確率)
 println("plot_data=",plot_data)
 
-plot(plot_data)
+plot_x = [0:n]
+plot(layer(x = plot_x, y = plot_data[1:3:end],
+					 Theme(default_color = color("red")),
+					 Stat.xticks(ticks=[0, 20, 40, 60, 80, 100]),
+					 Stat.yticks(ticks=[0.0, 0.2, 0.4, 0.6, 0.8, 1.0]), 
+					 Geom.line),
+		 layer(x = plot_x, y = plot_data[2:3:end],
+					 Theme(default_color = color("blue")),
+					 Stat.xticks(ticks=[0, 20, 40, 60, 80, 100]),
+					 Stat.yticks(ticks=[0.0, 0.2, 0.4, 0.6, 0.8, 1.0]), 
+					 Geom.line),
+		 layer(x = plot_x, y = plot_data[3:3:end],
+					 Theme(default_color = color("green")),
+					 Stat.xticks(ticks=[0, 20, 40, 60, 80, 100]),
+					 Stat.yticks(ticks=[0.0, 0.2, 0.4, 0.6, 0.8, 1.0]), 
+					 Geom.line))
