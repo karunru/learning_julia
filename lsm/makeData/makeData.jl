@@ -10,6 +10,6 @@ num = 100
 x = randn(num)
 y =	f(x) + randn(num)
 
-writedlm("training.csv",[x y])
+writedlm("training.csv",[x y],',')
 
 plot(x=x,y=y,Geom.point)
